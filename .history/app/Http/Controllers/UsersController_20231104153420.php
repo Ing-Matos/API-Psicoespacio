@@ -18,7 +18,7 @@ class UsersController extends Controller
         //Validacion de los datos 
         $request->validate([
             'full_name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'password' => 'required|confirmed',
             'photo' => 'required|image|dimensions:min_width=200,min_height=200',
             'phone'=>'required',
@@ -27,7 +27,6 @@ class UsersController extends Controller
             'role'=>'required'
 
         ]);
-        
 
         $path = $request->photo->store('public/perfil');
 
@@ -36,6 +35,11 @@ class UsersController extends Controller
         $User = new User();
         $User -> full_name = $request->full_name;
         $User -> email = $request->email;
+        $users = User::all();
+        if($users->email==$request->email){
+
+            return response(["message"=>"El correo ya existe"]);
+        }
         $User -> password = Hash::make($request->password);
         $User -> photo = $url;
         $User -> birthdate = $request->birthdate;
@@ -47,7 +51,6 @@ class UsersController extends Controller
         $User->save();
 
         $User->sendEmailVerificationNotification();
-        
 
         return response(["message"=>"save user"],Response::HTTP_CREATED);
     }

@@ -16,18 +16,7 @@ class UsersController extends Controller
     public function register (Request $request)
     {
         //Validacion de los datos 
-        $request->validate([
-            'full_name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed',
-            'photo' => 'required|image|dimensions:min_width=200,min_height=200',
-            'phone'=>'required',
-            'birthdate'=>'required',
-            'status' => 'required',
-            'role'=>'required'
-
-        ]);
-        
+        $validator=validate::make($request->all(), []);
 
         $path = $request->photo->store('public/perfil');
 
@@ -47,7 +36,6 @@ class UsersController extends Controller
         $User->save();
 
         $User->sendEmailVerificationNotification();
-        
 
         return response(["message"=>"save user"],Response::HTTP_CREATED);
     }

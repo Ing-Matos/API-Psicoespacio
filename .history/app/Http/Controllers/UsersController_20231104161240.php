@@ -27,7 +27,10 @@ class UsersController extends Controller
             'role'=>'required'
 
         ]);
-        
+
+        if($request->errors()){
+            return response()->json(['error'=> $request->errors()]);
+        }
 
         $path = $request->photo->store('public/perfil');
 
@@ -47,7 +50,6 @@ class UsersController extends Controller
         $User->save();
 
         $User->sendEmailVerificationNotification();
-        
 
         return response(["message"=>"save user"],Response::HTTP_CREATED);
     }

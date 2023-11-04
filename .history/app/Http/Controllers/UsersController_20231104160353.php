@@ -27,7 +27,6 @@ class UsersController extends Controller
             'role'=>'required'
 
         ]);
-        
 
         $path = $request->photo->store('public/perfil');
 
@@ -43,11 +42,13 @@ class UsersController extends Controller
         $User -> role = $request -> role;
         $User -> phone = $request -> phone;
 
+        if($User->email!=$User->unique ){
+            return response(["message"=>"error"]);
+        }
         
         $User->save();
 
         $User->sendEmailVerificationNotification();
-        
 
         return response(["message"=>"save user"],Response::HTTP_CREATED);
     }

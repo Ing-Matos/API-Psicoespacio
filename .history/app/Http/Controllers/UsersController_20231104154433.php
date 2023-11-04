@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\ValidatorApp\Http\Controllers\validate;
 class UsersController extends Controller
 {
 
     public function register (Request $request)
     {
         //Validacion de los datos 
-        $request->validate([
+        $validator=validate::make($request->all(), [
             'full_name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
@@ -25,9 +25,7 @@ class UsersController extends Controller
             'birthdate'=>'required',
             'status' => 'required',
             'role'=>'required'
-
         ]);
-        
 
         $path = $request->photo->store('public/perfil');
 
@@ -47,7 +45,6 @@ class UsersController extends Controller
         $User->save();
 
         $User->sendEmailVerificationNotification();
-        
 
         return response(["message"=>"save user"],Response::HTTP_CREATED);
     }
