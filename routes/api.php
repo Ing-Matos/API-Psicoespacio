@@ -1,7 +1,9 @@
 <?php
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CitasController;
+use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\testimonialsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
@@ -32,6 +34,28 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::get('testimonials/list',[testimonialsController::class,'list_testimonials']);
     Route::post('testimonials/update/{id}',[testimonialsController::class,'testimonials_update']);
 
-
 });
+
+// de aqui para abajo lo agregas arriba pls
+Route::prefix('clientes')->group(function () {
+   Route::get('/', [ClienteController::class, 'index']);
+   Route::post('/store', [ClienteController::class, 'store']);
+   Route::get('/{cliente}/show', [ClienteController::class, 'show']);
+   Route::put('/{cliente}/update', [ClienteController::class, 'update']);
+   Route::delete('/{cliente}', [ClienteController::class, 'destroy']);
+});
+Route::prefix('citas')->group(function () {
+    Route::get('/', [CitasController::class, 'index']);
+    Route::post('/store', [CitasController::class, 'store']);
+    Route::get('/{cliente}/show', [CitasController::class, 'show']);
+    Route::put('/{cliente}/update', [CitasController::class, 'update']);
+    Route::delete('/{cliente}', [CitasController::class, 'destroy']);
+ });
+ Route::prefix('medicos')->group(function () {
+    Route::get('/', [MedicoController::class, 'index']);
+    Route::post('/store', [MedicoController::class, 'store']);
+    Route::get('/{cliente}/show', [MedicoController::class, 'show']);
+    Route::put('/{cliente}/update', [MedicoController::class, 'update']);
+    Route::delete('/{cliente}', [MedicoController::class, 'destroy']);
+ });
 
