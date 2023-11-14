@@ -18,12 +18,7 @@ class ClienteResource extends JsonResource
 
             "id"=> $this->id,
             "nombre_completo"=> $this->nombre_completo,
-            //  "email"=>$this->email,
-            //  "address"=>$this->address,
-            //  "phone"=>$this->phone,
-            //  "servicio_id"=>$this->servicios_id,
-            //  "servicio" => new ServiceResource($this->servicio),
-
+            "citas"=>$this->cita->nombre
 
 
         ];

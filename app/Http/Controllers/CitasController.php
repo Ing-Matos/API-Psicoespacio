@@ -49,12 +49,19 @@ class CitasController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        try {
+            $cita = Citas::find($id);
+
+            if (!$cita) {
+                return response()->json(['message' => 'Client not found'], 404);
+            }
+
+            return new CitaResource($cita);
+        } catch (\Throwable $th) {
+            throw new SomethingWentWrong($th);
+        }
     }
 
     /**

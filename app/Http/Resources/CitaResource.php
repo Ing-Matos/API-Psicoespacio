@@ -17,7 +17,7 @@ class CitaResource extends JsonResource
         return [
 
             "id"=> $this->id,
-            "nombre_"=> $this->nombre,
+            "nombre"=> $this->nombre,
 
         ];
     }

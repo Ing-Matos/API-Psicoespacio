@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string("metodo_pago");
             $table->string("motivo_consulta");
             $table->unsignedBigInteger('medico_id')->nullable();
-
             $table->timestamps();
         });
     }

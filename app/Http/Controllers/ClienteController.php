@@ -61,12 +61,21 @@ class ClienteController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+
+        try {
+            $client = Clientes::find($id);
+
+            if (!$client) {
+                return response()->json(['message' => 'Client not found'], 404);
+            }
+
+            return new ClienteResource($client);
+        } catch (\Throwable $th) {
+            throw new SomethingWentWrong($th);
+        }
+
     }
 
     /**
