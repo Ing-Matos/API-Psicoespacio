@@ -55,7 +55,7 @@ class CitasController extends Controller
             $cita = Citas::find($id);
 
             if (!$cita) {
-                return response()->json(['message' => 'Client not found'], 404);
+                return response()->json(['message' => 'cita not found'], 404);
             }
 
             return new CitaResource($cita);

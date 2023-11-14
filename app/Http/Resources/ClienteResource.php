@@ -18,7 +18,9 @@ class ClienteResource extends JsonResource
 
             "id"=> $this->id,
             "nombre_completo"=> $this->nombre_completo,
-            "citas"=>$this->cita->nombre
+            "edad"=>$this->edad ?? null,
+            "telefono"=>$this->telefono ?? null,
+            "tipo_cita"=>$this->tipo_cita ?? null
 
 
         ];

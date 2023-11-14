@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Clientes extends Model
 {
     use HasFactory;
-
-    public function cita()
-    {
-        return $this->belongsTo(Citas::class, 'cita_id');
-    }
+    
+public function cita()
+{
+    return $this->belongsTo(Citas::class, 'cita_id');
+}
 
     public function medico()
     {

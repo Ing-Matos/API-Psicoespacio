@@ -17,8 +17,9 @@ class CitaResource extends JsonResource
         return [
 
             "id"=> $this->id,
-            "nombre"=> $this->nombre,
-
+            "nombre_cita"=> $this->nombre,
+            "nombre_medico" => $this->medico->nombre ?? null ,
+            "nombre_paciente"=>$this->clientes->nombre_completo ?? null
         ];
     }
 }
