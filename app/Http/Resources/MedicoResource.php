@@ -17,7 +17,8 @@ class MedicoResource extends JsonResource
         return [
 
             "id"=> $this->id,
-            "nombre"=> $this->nombre,
+            "nombre"=> $this->nombre  ?? null,
+            "apellido"=>$this->apellido ?? null,
 
         ];
     }

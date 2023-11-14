@@ -9,8 +9,16 @@ class Citas extends Model
 {
     use HasFactory;
 
-    public function clientes()
-    {
-        return $this->hasMany(Clientes::class, 'medico_id', 'id');
-    }
+    // Citas.php
+public function medico()
+{
+    return $this->belongsTo(Medico::class, 'medico_id');
+}
+
+public function clientes()
+{
+    return $this->belongsTo(Clientes::class, 'cliente_id');
+}
+
+
 }
